@@ -36,7 +36,7 @@
         {% csrf_token %}
         <button type="submit" class="btn btn-danger btn-sm">
             <i class="bi bi-bell me-1"></i> Send reminder
-            {% if invoice.reminder_sent_at %}<span class="opacity-75 ms-1" style="font-size:0.75rem;">(last {{ invoice.reminder_sent_at|date:"d M" }})</span>{% endif %}
+            {% if invoice.reminder_sent_at %}<span class="opacity-75 ms-1" style="font-size:0.75rem;">(last {{ invoice.reminder_sent_at|date:"M j" }})</span>{% endif %}
         </button>
     </form>
     {% endif %}
@@ -65,16 +65,16 @@
                     <dd class="col-sm-8 small">{{ invoice.period }}</dd>
 
                     <dt class="col-sm-4 text-muted fw-normal small">Amount</dt>
-                    <dd class="col-sm-8 small fw-semibold">£{{ invoice.amount|floatformat:2 }}</dd>
+                    <dd class="col-sm-8 small fw-semibold">${{ invoice.amount|floatformat:2 }}</dd>
 
                     {% if invoice.items.all %}
                     <dt class="col-sm-4 text-muted fw-normal small">Products</dt>
-                    <dd class="col-sm-8 small">{{ invoice.items.count }} item{{ invoice.items.count|pluralize }} — £{{ invoice.items_total|floatformat:2 }}</dd>
+                    <dd class="col-sm-8 small">{{ invoice.items.count }} item{{ invoice.items.count|pluralize }} — ${{ invoice.items_total|floatformat:2 }}</dd>
                     {% endif %}
 
                     <dt class="col-sm-4 text-muted fw-normal small">Due date</dt>
                     <dd class="col-sm-8 small">
-                        {{ invoice.due_date|date:"d M Y" }}
+                        {{ invoice.due_date|date:"M j, Y" }}
                         {% if invoice.is_overdue %}<span class="badge bg-warning-subtle text-warning ms-1" style="font-size:0.6rem;">Overdue</span>{% endif %}
                     </dd>
 
@@ -92,7 +92,7 @@
                     </dd>
 
                     <dt class="col-sm-4 text-muted fw-normal small">Created</dt>
-                    <dd class="col-sm-8 small mb-0">{{ invoice.created_at|date:"d M Y" }}</dd>
+                    <dd class="col-sm-8 small mb-0">{{ invoice.created_at|date:"M j, Y" }}</dd>
 
                     {% if invoice.notes %}
                     <dt class="col-sm-4 text-muted fw-normal small mt-2">Notes</dt>
@@ -123,8 +123,8 @@
                         <tr>
                             <td class="ps-3 small">{{ item.description }}</td>
                             <td class="small">{{ item.quantity }}</td>
-                            <td class="small">£{{ item.unit_price|floatformat:2 }}</td>
-                            <td class="small fw-semibold">£{{ item.line_total|floatformat:2 }}</td>
+                            <td class="small">${{ item.unit_price|floatformat:2 }}</td>
+                            <td class="small fw-semibold">${{ item.line_total|floatformat:2 }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -139,7 +139,7 @@
                 <h6 class="mb-0">
                     Payments
                     {% if amount_paid %}
-                    <span class="text-muted fw-normal small ms-1">£{{ amount_paid|floatformat:2 }} of £{{ invoice.amount|floatformat:2 }} received</span>
+                    <span class="text-muted fw-normal small ms-1">${{ amount_paid|floatformat:2 }} of ${{ invoice.amount|floatformat:2 }} received</span>
                     {% endif %}
                 </h6>
                 {% if invoice.status != 'paid' %}
@@ -156,9 +156,9 @@
                         {% csrf_token %}
                         <div class="row g-2">
                             <div class="col-sm-3">
-                                <label class="form-label small fw-semibold">Amount (£)</label>
+                                <label class="form-label small fw-semibold">Amount ($)</label>
                                 <div class="input-group input-group-sm">
-                                    <span class="input-group-text">£</span>
+                                    <span class="input-group-text">$</span>
                                     <input type="number" name="amount" class="form-control" step="0.01"
                                            value="{{ invoice.amount|floatformat:2 }}">
                                 </div>
@@ -203,9 +203,9 @@
                     <tbody>
                         {% for payment in payments %}
                         <tr>
-                            <td class="ps-3 small">{{ payment.paid_at|date:"d M Y" }}</td>
+                            <td class="ps-3 small">{{ payment.paid_at|date:"M j, Y" }}</td>
                             <td class="small text-muted">{{ payment.get_method_display }}</td>
-                            <td class="small fw-semibold">£{{ payment.amount|floatformat:2 }}</td>
+                            <td class="small fw-semibold">${{ payment.amount|floatformat:2 }}</td>
                             <td class="small text-muted">{{ payment.notes|default:"—" }}</td>
                         </tr>
                         {% endfor %}

@@ -58,7 +58,7 @@ class SignedWaiver(models.Model):
     offline = models.BooleanField(default=False, help_text='Signed on paper, uploaded manually')
 
     def __str__(self):
-        return f"{self.signer_name} — {self.template.name} ({self.signed_at:%d %b %Y})"
+        return f"{self.signer_name} — {self.template.name} ({self.signed_at:%b %d, %Y})"
 
     class Meta:
         ordering = ['-signed_at']

@@ -157,7 +157,7 @@ class StripeWebhookView(View):
         except Member.DoesNotExist:
             return
 
-        amount_gbp = stripe_invoice.amount_paid / 100
+        amount_paid_usd = stripe_invoice.amount_paid / 100
         billing_reason = getattr(stripe_invoice, 'billing_reason', '')
         period_end = getattr(stripe_invoice, 'period_end', None)
 
@@ -173,13 +173,13 @@ class StripeWebhookView(View):
             member=member,
             organisation=member.organisation,
             period=f"Subscription — {period_str}",
-            amount=amount_gbp,
+            amount=amount_paid_usd,
             due_date=timezone.localdate(),
             status='paid',
         )
         Payment.objects.create(
             invoice=invoice,
-            amount=amount_gbp,
+            amount=amount_paid_usd,
             method='Stripe (subscription)',
             stripe_payment_id=getattr(stripe_invoice, 'payment_intent', '') or '',
             notes=f"Automatic subscription payment — {stripe_invoice.id}",

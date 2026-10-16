@@ -42,8 +42,8 @@ def invoice_values(invoice):
     return {
         'period': invoice.period,
         # What's left to pay; for a paid invoice, its total (the summary then says Paid).
-        'amount': f'£{invoice.balance_due if invoice.balance_due else invoice.amount:.2f}',
-        'due_date': invoice.due_date.strftime('%-d %b %Y'),
+        'amount': f'${invoice.balance_due if invoice.balance_due else invoice.amount:.2f}',
+        'due_date': invoice.due_date.strftime('%b %-d, %Y'),
         'reference': invoice.payment_reference,
         'pay_link': pay_url(invoice),
         'portal_link': portal_url_for(invoice.member) or '',

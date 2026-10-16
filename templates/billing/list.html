@@ -32,7 +32,7 @@
         <div class="card border-0 shadow-sm h-100">
             <div class="card-body">
                 <div class="text-muted small mb-1">Outstanding</div>
-                <div class="fs-4 fw-bold text-danger">£{{ total_unpaid|floatformat:2 }}</div>
+                <div class="fs-4 fw-bold text-danger">${{ total_unpaid|floatformat:2 }}</div>
                 <div class="text-muted small">{{ count_unpaid }} unpaid invoice{{ count_unpaid|pluralize }}</div>
             </div>
         </div>
@@ -41,7 +41,7 @@
         <div class="card border-0 shadow-sm h-100">
             <div class="card-body">
                 <div class="text-muted small mb-1">Collected</div>
-                <div class="fs-4 fw-bold text-success">£{{ total_paid|floatformat:2 }}</div>
+                <div class="fs-4 fw-bold text-success">${{ total_paid|floatformat:2 }}</div>
             </div>
         </div>
     </div>
@@ -108,9 +108,9 @@
                         {% endif %}
                     </td>
                     <td class="small text-muted">{{ invoice.period }}</td>
-                    <td class="small fw-semibold">£{{ invoice.amount|floatformat:2 }}</td>
+                    <td class="small fw-semibold">${{ invoice.amount|floatformat:2 }}</td>
                     <td class="small text-muted">
-                        {{ invoice.due_date|date:"d M Y" }}
+                        {{ invoice.due_date|date:"M j, Y" }}
                         {% if invoice.is_overdue %}
                         <span class="badge bg-warning-subtle text-warning ms-1" style="font-size:0.6rem;">Overdue</span>
                         {% endif %}

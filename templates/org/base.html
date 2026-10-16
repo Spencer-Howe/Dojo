@@ -488,7 +488,7 @@ function closeSidebar() {
 </div>
 <script>
 // Inactivity logout (Settings → Security). The server restarts the clock on
-// every request to this organisation, so activity on the page pings it now
+// every request to this organization, so activity on the page pings it now
 // and then; timers count from the last time the server heard from us.
 (function () {
     var limit = {{ org.session_timeout_minutes }} * 60 * 1000;

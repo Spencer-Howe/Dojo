@@ -2,7 +2,7 @@
 
 {% block title %}{{ grading.name }}{% endblock %}
 {% block page_title %}{{ grading.name }}{% if not single %} — {{ session.display_name }}{% endif %}{% endblock %}
-{% block page_subtitle %}{{ grading.system.name }} · {{ session.date|date:"D d M Y" }}{% endblock %}
+{% block page_subtitle %}{{ grading.system.name }} · {{ session.date|date:"D, M j, Y" }}{% endblock %}
 
 {% block page_actions %}
 <div class="d-flex gap-2">

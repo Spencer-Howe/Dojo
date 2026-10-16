@@ -45,7 +45,7 @@ class Command(BaseCommand):
 
         count = candidates.count()
         for app in candidates:
-            label = f'{app.name} (#{app.pk}, {app.organisation}) — {app.get_status_display()} {app.decided_at:%d %b %Y}'
+            label = f'{app.name} (#{app.pk}, {app.organisation}) — {app.get_status_display()} {app.decided_at:%b %d, %Y}'
             if options['dry_run']:
                 self.stdout.write(f'Would delete: {label}')
             else:

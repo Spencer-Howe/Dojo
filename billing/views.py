@@ -331,7 +331,7 @@ class RecordPaymentView(InvoiceAccessMixin, View):
             invoice.status = Invoice.Status.PAID
             invoice.save(update_fields=['status'])
 
-        messages.success(request, f'Payment of £{amount:.2f} recorded.')
+        messages.success(request, f'Payment of ${amount:.2f} recorded.')
         return redirect('invoice_detail', org_slug=self.org.slug, pk=pk)
 
 

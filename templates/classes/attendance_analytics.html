@@ -98,7 +98,7 @@
                     </td>
                     <td class="py-2 small text-muted">
                         {% if member.last_attended %}
-                            {{ member.last_attended|date:"d M Y" }}
+                            {{ member.last_attended|date:"M j, Y" }}
                             <span class="text-muted" style="font-size:0.75rem;">
                                 ({{ member.last_attended|timesince }} ago)
                             </span>

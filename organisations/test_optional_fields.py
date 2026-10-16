@@ -67,7 +67,7 @@ class FieldTestBase(TestCase):
 
 class MemberPagesTests(FieldTestBase):
     SENTINELS = {
-        'date_of_birth': '01 May 2012',
+        'date_of_birth': 'May 1, 2012',
         'phone': '07700 900111',
         'address': '1 SENTINEL Street',
         'emergency_contact_2': 'EC2-SENTINEL',

@@ -2,7 +2,7 @@
 
 {% block title %}Audit log{% endblock %}
 {% block page_title %}Audit log{% endblock %}
-{% block page_subtitle %}A record of every change made in this organisation{% endblock %}
+{% block page_subtitle %}A record of every change made in this organization{% endblock %}
 
 {% block main_content %}
 <div class="card border-0 shadow-sm">
@@ -23,7 +23,7 @@
                     {% for entry in entries %}
                     <tr>
                         <td class="ps-3 text-muted small" style="white-space: nowrap;">
-                            {{ entry.timestamp|date:"d M Y H:i" }}
+                            {{ entry.timestamp|date:"M j, Y g:i A" }}
                         </td>
                         <td class="small">
                             {% if entry.actor %}

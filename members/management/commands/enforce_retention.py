@@ -38,7 +38,7 @@ class Command(BaseCommand):
             return
 
         for member in candidates:
-            label = f'{member.name} (#{member.pk}, {member.organisation}) — archived {member.archived_at:%d %b %Y}'
+            label = f'{member.name} (#{member.pk}, {member.organisation}) — archived {member.archived_at:%b %d, %Y}'
             if options['dry_run']:
                 self.stdout.write(f'Would anonymise: {label}')
             else:

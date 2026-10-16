@@ -106,7 +106,7 @@ class GradingSession(models.Model):
 
     @property
     def display_name(self):
-        return self.name or f"{self.date:%d %b %Y}"
+        return self.name or f"{self.date:%b %d, %Y}"
 
     class Meta:
         ordering = ('date', 'name', 'pk')

@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Register — {{ cls.name }} — {{ session.date|date:"d M Y" }}</title>
+    <title>Register — {{ cls.name }} — {{ session.date|date:"M j, Y" }}</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: Arial, sans-serif; font-size: 13px; color: #000; padding: 20px; }
@@ -31,7 +31,7 @@
     {% if org.logo %}<div style="float:right;">{% org_logo org '#ffffff' 48 160 %}</div>{% endif %}
     <h1>{{ cls.name }}</h1>
     <div class="meta">
-        {{ session.date|date:"l d F Y" }} &mdash; {{ org.name }}
+        {{ session.date|date:"l, F j, Y" }} &mdash; {{ org.name }}
         {% if session.is_cancelled %} &mdash; <strong>CANCELLED</strong>{% endif %}
     </div>
 
@@ -87,7 +87,7 @@
     {% endif %}
 
     <div style="margin-top:32px; color:#555; font-size:11px;">
-        {{ enrolled|length }} enrolled &mdash; printed {{ today|date:"d M Y" }}
+        {{ enrolled|length }} enrolled &mdash; printed {{ today|date:"M j, Y" }}
     </div>
 </body>
 </html>

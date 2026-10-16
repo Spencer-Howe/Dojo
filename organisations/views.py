@@ -73,7 +73,7 @@ class SetupView(View):
 
         errors = []
         if not org_name:
-            errors.append('Organisation name is required.')
+            errors.append('Organization name is required.')
         if not username:
             errors.append('Username is required.')
         elif User.objects.filter(username=username).exists():
@@ -577,7 +577,7 @@ class StaffListView(OrgAdminMixin, View):
                 member=om, start_date=start_date, end_date=end_date, note=note,
             )
             name = om.user.get_full_name() or om.user.username
-            messages.success(request, f'Holiday added for {name} ({start_date:%d %b %Y} – {end_date:%d %b %Y}).')
+            messages.success(request, f'Holiday added for {name} ({start_date:%b %d, %Y} – {end_date:%b %d, %Y}).')
 
         elif action == 'remove_holiday':
             holiday_pk = request.POST.get('holiday_pk')
@@ -840,7 +840,7 @@ class OrgSettingsView(OrgAdminMixin, View):
         website = request.POST.get('website', '').strip()
 
         if not name:
-            messages.error(request, 'Organisation name is required.')
+            messages.error(request, 'Organization name is required.')
             return render(request, self.template_name, self._context())
 
         self.org.name = name
@@ -1144,7 +1144,7 @@ class AccountView(OrgMixin, View):
 
         if action == 'add_holiday':
             if not self.org_membership:
-                messages.error(request, "You're not a staff member of this organisation.")
+                messages.error(request, "You're not a staff member of this organization.")
                 return redirect('account_settings', org_slug=self.org.slug)
 
             start_raw = request.POST.get('start_date', '').strip()
@@ -1169,12 +1169,12 @@ class AccountView(OrgMixin, View):
             StaffHoliday.objects.create(
                 member=self.org_membership, start_date=start_date, end_date=end_date, note=note,
             )
-            messages.success(request, f'Holiday added ({start_date:%d %b %Y} – {end_date:%d %b %Y}).')
+            messages.success(request, f'Holiday added ({start_date:%b %d, %Y} – {end_date:%b %d, %Y}).')
             return redirect('account_settings', org_slug=self.org.slug)
 
         elif action == 'remove_holiday':
             if not self.org_membership:
-                messages.error(request, "You're not a staff member of this organisation.")
+                messages.error(request, "You're not a staff member of this organization.")
                 return redirect('account_settings', org_slug=self.org.slug)
 
             holiday_pk = request.POST.get('holiday_pk')
@@ -1186,7 +1186,7 @@ class AccountView(OrgMixin, View):
 
         elif action == 'update_emergency_contacts':
             if not self.org_membership:
-                messages.error(request, "You're not a staff member of this organisation.")
+                messages.error(request, "You're not a staff member of this organization.")
                 return redirect('account_settings', org_slug=self.org.slug)
             # Scoped to the logged-in user's own membership, and only the
             # emergency contact fields the club has switched on.

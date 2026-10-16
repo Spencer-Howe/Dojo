@@ -115,12 +115,12 @@
                         <dl class="row mb-0">
                             {% if 'date_of_birth' in org.enabled_fields %}
                             <dt class="col-sm-4 text-muted fw-normal small">Date of birth</dt>
-                            <dd class="col-sm-8 small">{{ member.date_of_birth|date:"d M Y"|default:"—" }}</dd>
+                            <dd class="col-sm-8 small">{{ member.date_of_birth|date:"M j, Y"|default:"—" }}</dd>
                             {% endif %}
 
                             {% if 'joined_date' in org.enabled_fields %}
                             <dt class="col-sm-4 text-muted fw-normal small">Joined</dt>
-                            <dd class="col-sm-8 small">{{ member.joined_date|date:"d M Y"|default:"—" }}</dd>
+                            <dd class="col-sm-8 small">{{ member.joined_date|date:"M j, Y"|default:"—" }}</dd>
                             {% endif %}
 
                             <dt class="col-sm-4 text-muted fw-normal small">Email</dt>
@@ -155,7 +155,7 @@
                             <dt class="col-sm-4 text-muted fw-normal small">{{ org.licence_label }} expiry</dt>
                             <dd class="col-sm-8 small mb-0">
                                 {% if member.licence_expiry %}
-                                    {{ member.licence_expiry|date:"d M Y" }}
+                                    {{ member.licence_expiry|date:"M j, Y" }}
                                     {% if member.licence_expiry < today %}
                                         <span class="badge bg-danger-subtle text-danger ms-1">Expired</span>
                                     {% elif member.licence_expiry <= thirty_days %}
@@ -407,7 +407,7 @@
                                     </td>
                                     <td class="py-2 small fw-semibold">{{ prog.stage.name }}</td>
                                     <td class="py-2 small text-muted">{{ prog.stage.system.name }}</td>
-                                    <td class="py-2 small text-muted">{{ prog.achieved_date|date:"d M Y" }}</td>
+                                    <td class="py-2 small text-muted">{{ prog.achieved_date|date:"M j, Y" }}</td>
                                     <td class="py-2 text-end pe-3">
                                         {% with candidate=prog.grading_candidate %}
                                         {% if candidate %}
@@ -489,7 +489,7 @@
                             {% if member.billing_policy %}
                             <span class="badge bg-primary-subtle text-primary border border-primary-subtle">{{ member.billing_policy.name }}</span>
                             {% elif member.monthly_fee %}
-                            <span class="badge bg-secondary-subtle text-secondary">£{{ member.monthly_fee|floatformat:2 }}/mo</span>
+                            <span class="badge bg-secondary-subtle text-secondary">${{ member.monthly_fee|floatformat:2 }}/mo</span>
                             {% endif %}
                             {% if member.subscription_status == 'active' %}
                             <span class="badge bg-success-subtle text-success">Old subscription active</span>
@@ -513,7 +513,7 @@
                                 <div class="small fw-semibold text-muted mb-1">Billing policy</div>
                                 {% if member.billing_policy %}
                                 <div class="fw-medium">{{ member.billing_policy.name }}</div>
-                                <div class="text-muted small">£{{ member.billing_policy.amount }} / {{ member.billing_policy.get_billing_cycle_display|lower }}</div>
+                                <div class="text-muted small">${{ member.billing_policy.amount }} / {{ member.billing_policy.get_billing_cycle_display|lower }}</div>
                                 {% else %}
                                 <span class="text-muted small">None assigned — falls back to class policy</span>
                                 {% endif %}
@@ -573,7 +573,7 @@
                                     <td class="ps-3 py-2 small">
                                         <a href="{% url 'invoice_detail' org_slug=org.slug pk=invoice.pk %}" class="text-decoration-none">{{ invoice.period }}</a>
                                     </td>
-                                    <td class="small py-2 fw-semibold">£{{ invoice.amount|floatformat:2 }}</td>
+                                    <td class="small py-2 fw-semibold">${{ invoice.amount|floatformat:2 }}</td>
                                     <td class="small py-2 text-end pe-3">
                                         {% if invoice.status == 'paid' %}
                                         <span class="badge bg-success-subtle text-success">Paid</span>
@@ -664,7 +664,7 @@
                                 <tr>
                                     <td class="ps-3 py-2 small fw-semibold">{{ sw.template.name }}</td>
                                     <td class="py-2 small text-muted">
-                                        {{ sw.signed_at|date:"d M Y" }}
+                                        {{ sw.signed_at|date:"M j, Y" }}
                                         {% if sw.offline %}<span class="badge bg-secondary-subtle text-secondary ms-1">Paper</span>{% endif %}
                                     </td>
                                     <td class="py-2 text-end pe-3">
@@ -742,7 +742,7 @@
                                 <tr>
                                     <td class="ps-3 py-2 small fw-semibold">{{ doc.name }}</td>
                                     <td class="py-2 small text-muted">{{ doc.get_category_display }}</td>
-                                    <td class="py-2 small text-muted">{{ doc.uploaded_at|date:"d M Y" }}</td>
+                                    <td class="py-2 small text-muted">{{ doc.uploaded_at|date:"M j, Y" }}</td>
                                     <td class="py-2 text-end pe-3">
                                         <div class="d-flex gap-1 justify-content-end">
                                             <a href="{% url 'document_download' org_slug=org.slug member_pk=member.pk pk=doc.pk %}"
@@ -799,7 +799,7 @@
                                 <div>
                                     <p class="small mb-0">{{ note.body }}</p>
                                     <p class="text-muted mb-0" style="font-size:0.75rem;">
-                                        {{ note.author.get_full_name|default:note.author.username }} · {{ note.created_at|date:"d M Y H:i" }}
+                                        {{ note.author.get_full_name|default:note.author.username }} · {{ note.created_at|date:"M j, Y g:i A" }}
                                     </p>
                                 </div>
                                 <form method="post" action="{% url 'member_note_delete' org_slug=org.slug pk=member.pk note_pk=note.pk %}">

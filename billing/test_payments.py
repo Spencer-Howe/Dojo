@@ -154,7 +154,7 @@ class PayPageTests(PaymentsTestCase):
     def test_shows_amount_reference_and_bank_details(self):
         self.configure(**BANK, **form(instructions='Ask a coach if you need help.'))
         response = self.client.get(self.url())
-        self.assertContains(response, '£45.00')
+        self.assertContains(response, '$45.00')
         self.assertContains(response, f'INV{self.invoice.pk}')
         self.assertContains(response, '12-34-56')
         self.assertContains(response, 'Ask a coach if you need help.')
@@ -163,7 +163,7 @@ class PayPageTests(PaymentsTestCase):
 
     def test_part_payments_reduce_the_amount_due(self):
         Payment.objects.create(invoice=self.invoice, amount=Decimal('20.00'), paid_at=timezone.now())
-        self.assertContains(self.client.get(self.url()), '£25.00')
+        self.assertContains(self.client.get(self.url()), '$25.00')
 
     def test_paid_invoice(self):
         Invoice.objects.filter(pk=self.invoice.pk).update(status='paid')
@@ -180,7 +180,7 @@ class PayPageTests(PaymentsTestCase):
     def test_card_payment_uses_the_club_key_and_the_balance(self):
         self.configure(**CARD)
         Payment.objects.create(invoice=self.invoice, amount=Decimal('5.50'), paid_at=timezone.now())
-        self.assertContains(self.client.get(self.url()), 'Pay £39.50 by card')
+        self.assertContains(self.client.get(self.url()), 'Pay $39.50 by card')
         token = payments.pay_token(self.invoice)
         with mock.patch('stripe.checkout.Session.create', return_value=mock.Mock(url='https://checkout.stripe.test/s')) as create:
             response = self.client.post(reverse('invoice_pay_card', kwargs={'token': token}))
@@ -245,7 +245,7 @@ class InvoiceEmailTests(PaymentsTestCase):
         ok, _ = send_invoice_email(self.invoice)
         self.assertTrue(ok)
         html = mail.outbox[-1].alternatives[0][0]
-        self.assertIn('Pay £45.00 now', html)
+        self.assertIn('Pay $45.00 now', html)
         self.assertIn(payments.pay_url(self.invoice), html)
         self.assertIn('Or pay by bank transfer', html)
         self.assertIn(f'INV{self.invoice.pk}', html)
@@ -309,7 +309,7 @@ class CheckoutDetailsTests(PaymentsTestCase):
         policy = BillingPolicy.objects.create(organisation=self.org, name='Kids Termly', billing_cycle='termly', amount=50)
         gi = ProductVariant.objects.create(product=Product.objects.create(organisation=self.org, name='Judo Gi'),
                                            size='150cm', price=Decimal('25.00'))
-        # £45 membership after a £5 discount, plus two gis at £25: £95 in all.
+        # $45 membership after a $5 discount, plus two gis at $25: $95 in all.
         self.kit_invoice = Invoice.objects.create(organisation=self.org, member=self.member, billing_policy=policy,
                                                   amount=Decimal('95.00'), discount_amount=Decimal('5.00'),
                                                   period='Autumn 2026', due_date=date(2026, 9, 30))
@@ -325,7 +325,7 @@ class CheckoutDetailsTests(PaymentsTestCase):
         self.assertEqual(names, [('Kids Termly: Autumn 2026', 4500, 1), ('Judo Gi — 150cm', 2500, 2)])
         self.assertIn('For Ann Lee', lines[0]['price_data']['product_data']['description'])
         self.assertIn(f'reference INV{self.kit_invoice.pk}', lines[0]['price_data']['product_data']['description'])
-        self.assertIn('includes a £5.00 discount', lines[0]['price_data']['product_data']['description'])
+        self.assertIn('includes a $5.00 discount', lines[0]['price_data']['product_data']['description'])
         self.assertEqual(self.total(lines), 9500)
 
     def test_part_paid_invoices_show_what_is_left(self):
@@ -333,7 +333,7 @@ class CheckoutDetailsTests(PaymentsTestCase):
         lines = payments.checkout_line_items(self.kit_invoice)
         self.assertEqual(len(lines), 1)
         self.assertEqual(lines[0]['price_data']['product_data']['name'], 'Autumn 2026: remaining balance')
-        self.assertIn('£30.00 of £95.00 already paid', lines[0]['price_data']['product_data']['description'])
+        self.assertIn('$30.00 of $95.00 already paid', lines[0]['price_data']['product_data']['description'])
         self.assertEqual(self.total(lines), 6500)
 
     def test_plain_invoice(self):

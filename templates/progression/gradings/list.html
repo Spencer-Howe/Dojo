@@ -74,7 +74,7 @@
                         {% if grading.session_count > 1 %}<div class="text-muted small">{{ grading.session_count }} sessions</div>{% endif %}
                     </td>
                     <td class="small text-muted d-none d-sm-table-cell">{{ grading.system.name }}</td>
-                    <td class="small text-muted">{{ grading.starts|date:"d M Y" }}</td>
+                    <td class="small text-muted">{{ grading.starts|date:"M j, Y" }}</td>
                     <td class="small text-muted">{{ grading.candidate_count }}</td>
                     <td class="text-end pe-3">
                         <a href="{% url 'grading_detail' org_slug=org.slug pk=grading.pk %}" class="btn btn-sm btn-outline-secondary">Open</a>

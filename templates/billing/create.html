@@ -56,9 +56,9 @@
                             <input type="text" name="period" class="form-control" placeholder="e.g. January 2026">
                         </div>
                         <div class="col-sm-6">
-                            <label class="form-label fw-semibold small">Base amount (£)</label>
+                            <label class="form-label fw-semibold small">Base amount ($)</label>
                             <div class="input-group">
-                                <span class="input-group-text">£</span>
+                                <span class="input-group-text">$</span>
                                 <input type="number" name="amount" id="base-amount" class="form-control" step="0.01" min="0" placeholder="0.00">
                             </div>
                             <div class="form-text">Membership fee or other flat charge. Leave blank for a products-only invoice.</div>
@@ -89,11 +89,11 @@
                     <div id="product-rows"></div>
                     <div class="d-flex justify-content-end border-top pt-2 mt-2" id="products-total-row" style="display:none;">
                         <span class="small text-muted me-2">Products subtotal:</span>
-                        <span class="small fw-semibold" id="products-subtotal">£0.00</span>
+                        <span class="small fw-semibold" id="products-subtotal">$0.00</span>
                     </div>
                     <div class="d-flex justify-content-end mt-1" id="grand-total-row" style="display:none;">
                         <span class="small text-muted me-2">Invoice total:</span>
-                        <span class="fw-bold" id="grand-total">£0.00</span>
+                        <span class="fw-bold" id="grand-total">$0.00</span>
                     </div>
                     <p class="text-muted small mb-0 mt-2">
                         Product line items can only be added when invoicing a specific member — stock is deducted
@@ -119,7 +119,7 @@
                 {% for variant in product.variants.all %}
                 {% if variant.is_active %}
                 <option value="{{ variant.pk }}" data-price="{{ variant.price }}" data-stock="{{ variant.quantity_in_stock }}">
-                    {{ product.name }} — {{ variant.size }} (£{{ variant.price }}, {{ variant.quantity_in_stock }} in stock)
+                    {{ product.name }} — {{ variant.size }} (${{ variant.price }}, {{ variant.quantity_in_stock }} in stock)
                 </option>
                 {% endif %}
                 {% endfor %}
@@ -131,7 +131,7 @@
             <div class="form-text stock-hint"></div>
         </div>
         <div class="col-sm-2">
-            <div class="form-control-plaintext form-control-sm small fw-semibold line-total">£0.00</div>
+            <div class="form-control-plaintext form-control-sm small fw-semibold line-total">$0.00</div>
         </div>
         <div class="col-sm-1">
             <button type="button" class="btn btn-sm btn-outline-danger remove-product-row"><i class="bi bi-x"></i></button>
@@ -162,7 +162,7 @@ const rowsContainer = document.getElementById('product-rows');
 const rowTemplate = document.getElementById('product-row-template');
 
 function currency(n) {
-    return '£' + (Math.round(n * 100) / 100).toFixed(2);
+    return '$' + (Math.round(n * 100) / 100).toFixed(2);
 }
 
 function updateTotals() {

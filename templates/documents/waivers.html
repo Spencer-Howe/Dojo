@@ -36,7 +36,7 @@
                                 {% endif %}
                             </td>
                             <td class="py-3 small text-muted">{{ w.signed_copies.count }}</td>
-                            <td class="py-3 small text-muted">{{ w.created_at|date:"d M Y" }}</td>
+                            <td class="py-3 small text-muted">{{ w.created_at|date:"M j, Y" }}</td>
                             <td class="py-3 text-end pe-3">
                                 <div class="d-flex gap-2 justify-content-end">
                                     <a href="{% url 'waiver_download' org_slug=org.slug pk=w.pk %}" class="btn btn-sm btn-outline-secondary">

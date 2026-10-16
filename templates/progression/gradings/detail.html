@@ -36,7 +36,7 @@
                     <td class="ps-3">
                         <a href="{% url 'grading_session' org_slug=org.slug pk=grading.pk session_pk=session.pk %}" class="fw-semibold text-decoration-none">{{ session.display_name }}</a>
                     </td>
-                    <td class="small text-muted">{{ session.date|date:"D d M Y" }}</td>
+                    <td class="small text-muted">{{ session.date|date:"D, M j, Y" }}</td>
                     <td class="small text-muted">{{ session.people }}</td>
                     <td class="small text-muted">{{ session.passed }}</td>
                     <td class="text-end pe-3">

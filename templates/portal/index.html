@@ -30,7 +30,7 @@
 {% if request.GET.subscribed %}
 <div style="background:#d1fae5;border-bottom:1px solid #6ee7b7;padding:12px 0;text-align:center;">
     <span style="color:#065f46;font-weight:600;font-size:14px;">
-        Autopay set up — you'll be charged £{{ member.monthly_fee|floatformat:2 }} each month.
+        Autopay set up — you'll be charged ${{ member.monthly_fee|floatformat:2 }} each month.
     </span>
 </div>
 {% endif %}
@@ -125,10 +125,10 @@
                     <tr>
                         <td class="ps-3 py-3 small fw-semibold">{{ invoice.period }}</td>
                         <td class="py-3 small text-muted">
-                            Due {{ invoice.due_date|date:"d M Y" }}
+                            Due {{ invoice.due_date|date:"M j, Y" }}
                             {% if invoice.is_overdue %}<span class="badge bg-warning-subtle text-warning ms-1">Overdue</span>{% endif %}
                         </td>
-                        <td class="py-3 fw-bold">£{{ invoice.amount|floatformat:2 }}</td>
+                        <td class="py-3 fw-bold">${{ invoice.amount|floatformat:2 }}</td>
                         <td class="py-3 pe-3 text-end">
                             {# The amount is already in the row, so the button stays short enough for one line on a phone. #}
                             <a href="{{ invoice.pay_page }}" class="btn btn-dark btn-sm text-nowrap">
@@ -148,7 +148,7 @@
         </div>
         <div class="card-footer bg-white border-top py-2 px-3 d-flex justify-content-between align-items-center">
             <span class="small text-muted">Total outstanding</span>
-            <span class="fw-bold">£{{ outstanding_total|floatformat:2 }}</span>
+            <span class="fw-bold">${{ outstanding_total|floatformat:2 }}</span>
         </div>
     </div>
     {% else %}
@@ -175,7 +175,7 @@
                         {% endif %}
                         <span class="fw-semibold">{{ current_grade.stage.name }}</span>
                     </div>
-                    <p class="small text-muted mb-0 mt-1">{{ current_grade.stage.system.name }} · Achieved {{ current_grade.achieved_date|date:"d M Y" }}</p>
+                    <p class="small text-muted mb-0 mt-1">{{ current_grade.stage.system.name }} · Achieved {{ current_grade.achieved_date|date:"M j, Y" }}</p>
                     {% else %}
                     <p class="fw-semibold mb-0">Not yet graded</p>
                     {% endif %}
@@ -216,7 +216,7 @@
                         </td>
                         <td class="py-2 small fw-semibold">{{ prog.stage.name }}</td>
                         <td class="py-2 small text-muted">{{ prog.stage.system.name }}</td>
-                        <td class="py-2 small text-muted pe-3">{{ prog.achieved_date|date:"d M Y" }}</td>
+                        <td class="py-2 small text-muted pe-3">{{ prog.achieved_date|date:"M j, Y" }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -255,7 +255,7 @@
                 <tbody>
                     {% for att in recent_attendance %}
                     <tr>
-                        <td class="ps-3 py-2 small">{{ att.session.date|date:"d M Y" }}</td>
+                        <td class="ps-3 py-2 small">{{ att.session.date|date:"M j, Y" }}</td>
                         <td class="py-2 small text-muted pe-3">{{ att.session.assigned_class.name }}</td>
                     </tr>
                     {% endfor %}
@@ -278,7 +278,7 @@
                     {% for invoice in paid %}
                     <tr>
                         <td class="ps-3 py-2 small">{{ invoice.period }}</td>
-                        <td class="py-2 small fw-semibold">£{{ invoice.amount|floatformat:2 }}</td>
+                        <td class="py-2 small fw-semibold">${{ invoice.amount|floatformat:2 }}</td>
                         <td class="py-2 small text-end pe-3">
                             <span class="badge bg-success-subtle text-success">Paid</span>
                         </td>

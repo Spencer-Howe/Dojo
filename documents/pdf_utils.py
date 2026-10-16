@@ -51,7 +51,7 @@ def stamp_signature_on_pdf(template_file, signature_b64, signer_name, signed_at=
     c.setFont('Helvetica', 7)
     c.setFillColorRGB(0.4, 0.4, 0.4)
     c.drawString(sig_x, sig_y - 12, f"Signed electronically by {signer_name}")
-    c.drawString(sig_x, sig_y - 21, f"on {signed_at.strftime('%d %B %Y at %H:%M')}")
+    c.drawString(sig_x, sig_y - 21, f"on {signed_at.strftime('%B %d, %Y at %I:%M %p')}")
 
     c.save()
 

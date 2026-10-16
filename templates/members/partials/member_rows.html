@@ -38,7 +38,7 @@
     </td>
     {% endif %}
     {% if 'joined_date' in org.enabled_fields %}
-    <td class="text-muted small">{{ member.joined_date|date:"d M Y"|default:"—" }}</td>
+    <td class="text-muted small">{{ member.joined_date|date:"M j, Y"|default:"—" }}</td>
     {% endif %}
     <td>
         {% if member.is_active %}

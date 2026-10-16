@@ -26,7 +26,7 @@
                     <tbody>
                         {% for session in upcoming %}
                         <tr>
-                            <td class="ps-3 py-3 small fw-semibold">{{ session.date|date:"l d M Y" }}</td>
+                            <td class="ps-3 py-3 small fw-semibold">{{ session.date|date:"l, M j, Y" }}</td>
                             <td class="py-3 small text-muted">
                                 {% with count=session.attendance.count %}
                                 {% if count %}{{ count }} marked{% endif %}
@@ -64,7 +64,7 @@
                     <tbody>
                         {% for session in recent %}
                         <tr>
-                            <td class="ps-3 py-2 small text-muted">{{ session.date|date:"l d M Y" }}</td>
+                            <td class="ps-3 py-2 small text-muted">{{ session.date|date:"l, M j, Y" }}</td>
                             <td class="py-2 small text-muted">
                                 {% with total=session.attendance.count %}
                                 {% if total %}{{ total }} marked{% endif %}

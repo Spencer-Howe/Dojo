@@ -34,13 +34,13 @@ class BillingPolicy(models.Model):
 
     def __str__(self):
         if self.pricing_model == self.PricingModel.PER_SESSION:
-            return f"{self.name} (£{self.per_session_rate}/session / {self.get_billing_cycle_display()})"
-        return f"{self.name} (£{self.amount} flat / {self.get_billing_cycle_display()})"
+            return f"{self.name} (${self.per_session_rate}/session / {self.get_billing_cycle_display()})"
+        return f"{self.name} (${self.amount} flat / {self.get_billing_cycle_display()})"
 
     def display_amount(self):
         if self.pricing_model == self.PricingModel.PER_SESSION:
-            return f"£{self.per_session_rate}/session"
-        return f"£{self.amount}"
+            return f"${self.per_session_rate}/session"
+        return f"${self.amount}"
 
     class Meta:
         ordering = ['organisation', 'name']
@@ -65,7 +65,7 @@ class OrgTerm(models.Model):
 class PolicyDiscount(models.Model):
     class DiscountType(models.TextChoices):
         PERCENTAGE = 'percentage', 'Percentage (%)'
-        FIXED = 'fixed', 'Fixed amount (£)'
+        FIXED = 'fixed', 'Fixed amount ($)'
 
     policy = models.ForeignKey(BillingPolicy, on_delete=models.CASCADE, related_name='discounts')
     name = models.CharField(max_length=255)
@@ -76,7 +76,7 @@ class PolicyDiscount(models.Model):
     def __str__(self):
         if self.discount_type == self.DiscountType.PERCENTAGE:
             return f"{self.name} ({self.value}% off)"
-        return f"{self.name} (£{self.value} off)"
+        return f"{self.name} (${self.value} off)"
 
     def amount_off(self, base_amount):
         if self.discount_type == self.DiscountType.PERCENTAGE:
@@ -136,7 +136,7 @@ class Invoice(models.Model):
     autopay_attempts = models.PositiveSmallIntegerField(default=0)
 
     def __str__(self):
-        return f"{self.member} — {self.period} — £{self.amount} ({self.get_status_display()})"
+        return f"{self.member} — {self.period} — ${self.amount} ({self.get_status_display()})"
 
     @property
     def is_overdue(self):
@@ -185,7 +185,7 @@ class InvoiceItem(models.Model):
     unit_price = models.DecimalField(max_digits=8, decimal_places=2, help_text='Snapshot of the price at time of sale')
 
     def __str__(self):
-        return f"{self.quantity} x {self.description or self.variant} — £{self.line_total}"
+        return f"{self.quantity} x {self.description or self.variant} — ${self.line_total}"
 
     @property
     def line_total(self):
@@ -204,8 +204,9 @@ class Payment(models.Model):
     class Method(models.TextChoices):
         MANUAL = 'manual', 'Manual'
         STRIPE = 'stripe', 'Stripe'
-        BACS = 'bacs', 'BACS transfer'
+        BACS = 'bacs', 'Bank transfer (ACH)'
         CASH = 'cash', 'Cash'
+        CHECK = 'check', 'Check'
 
     invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE, related_name='payments')
     method = models.CharField(max_length=10, choices=Method.choices, default=Method.MANUAL)
@@ -215,7 +216,7 @@ class Payment(models.Model):
     notes = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return f"{self.invoice} — £{self.amount} at {self.paid_at}"
+        return f"{self.invoice} — ${self.amount} at {self.paid_at}"
 
     class Meta:
         ordering = ['-paid_at']

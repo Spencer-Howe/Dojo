@@ -9,7 +9,7 @@
     <td align="center">
       <a href="{{ pay_url }}"
          style="display:inline-block;background:{{ button_colour|default:brand_accent|default:'#212529' }};color:#fff;font-size:15px;font-weight:600;padding:14px 32px;border-radius:6px;text-decoration:none;">
-        {% if card_payments %}Pay £{{ invoice.balance_due|floatformat:2 }} now{% else %}How to pay{% endif %}
+        {% if card_payments %}Pay ${{ invoice.balance_due|floatformat:2 }} now{% else %}How to pay{% endif %}
       </a>
     </td>
   </tr>

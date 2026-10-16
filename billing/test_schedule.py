@@ -202,7 +202,7 @@ class PageTests(ScheduleTestCase):
         plan = InvoiceSchedule.objects.get(policy=self.monthly)
         self.assertTrue(plan.enabled)
         self.assertEqual(plan.starts_from, timezone.localdate())
-        self.assertContains(self.client.get(self.url), 'About 2 invoices (£90.00)')
+        self.assertContains(self.client.get(self.url), 'About 2 invoices ($90.00)')
 
     def test_reminder_settings(self):
         self.client.post(self.url, {'action': 'reminders', 'enabled': '1', 'after_days': '5', 'repeat_days': '10'})

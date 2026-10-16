@@ -22,7 +22,7 @@
                             <div class="text-muted" style="font-size:0.78rem;">{{ email_type.when }}</div>
                         </div>
                         {% if saved %}
-                        <span class="badge bg-primary-subtle text-primary text-nowrap" title="Changed {{ saved.updated_at|date:'j M Y' }}">Customised{% if saved.mode == 'html' %} · HTML{% endif %}</span>
+                        <span class="badge bg-primary-subtle text-primary text-nowrap" title="Changed {{ saved.updated_at|date:'M j, Y' }}">Customised{% if saved.mode == 'html' %} · HTML{% endif %}</span>
                         {% else %}
                         <span class="badge bg-light text-secondary border text-nowrap">Default</span>
                         {% endif %}
@@ -42,15 +42,15 @@
             <div class="card-body">
                 <form method="post">
                     {% csrf_token %}
-                    <label class="form-label small fw-semibold" for="header-colour">Header colour</label>
+                    <label class="form-label small fw-semibold" for="header-colour">Header color</label>
                     <div class="d-flex align-items-center gap-2 mb-1">
                         <input type="color" name="header_colour" id="header-colour" value="{{ layout.header_colour|default:club_colour }}" class="form-control form-control-color form-control-sm">
                         <div class="form-check mb-0">
                             <input class="form-check-input" type="checkbox" name="use_club_colour" id="use-club-colour" value="1" {% if not layout.header_colour %}checked{% endif %}>
-                            <label class="form-check-label small" for="use-club-colour">Use the club's colour</label>
+                            <label class="form-check-label small" for="use-club-colour">Use the club's color</label>
                         </div>
                     </div>
-                    <div class="form-text mb-3">The club's colour is set under Settings → Appearance.</div>
+                    <div class="form-text mb-3">The club's color is set under Settings → Appearance.</div>
 
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" name="show_logo" id="show-logo" value="1" {% if layout.show_logo %}checked{% endif %}>

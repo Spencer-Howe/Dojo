@@ -251,7 +251,7 @@ class Announcement(models.Model):
     recipient_label = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return f"{self.subject} ({self.sent_at:%d %b %Y})"
+        return f"{self.subject} ({self.sent_at:%b %d, %Y})"
 
     class Meta:
         ordering = ['-sent_at']

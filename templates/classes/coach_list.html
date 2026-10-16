@@ -17,7 +17,7 @@
                 {% if next_session %}
                 <p class="small mb-3">
                     <i class="bi bi-calendar-event me-1 text-muted"></i>
-                    Next: <strong>{{ next_session.date|date:"D d M" }}</strong>
+                    Next: <strong>{{ next_session.date|date:"D, M j" }}</strong>
                 </p>
                 {% endif %}
                 {% endwith %}

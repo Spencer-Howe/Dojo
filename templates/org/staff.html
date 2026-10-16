@@ -65,7 +65,7 @@
                     <th class="ps-3 small fw-semibold">Name</th>
                     <th class="small fw-semibold">Role</th>
                     <th class="small fw-semibold">Permissions</th>
-                    {% if 'dbs' in org.enabled_fields %}<th class="small fw-semibold">DBS</th>{% endif %}
+                    {% if 'dbs' in org.enabled_fields %}<th class="small fw-semibold">Background check</th>{% endif %}
                     {% if 'coaching_licence' in org.enabled_fields %}<th class="small fw-semibold">{{ org.coaching_licence_label }}</th>{% endif %}
                     {% if 'staff_emergency_contact' in org.enabled_fields or 'staff_emergency_contact_2' in org.enabled_fields %}<th class="small fw-semibold">Emergency contacts</th>{% endif %}
                     <th></th>
@@ -123,7 +123,7 @@
                         {% endif %}
                         {% if om.dbs_expiry %}
                             <div class="text-muted" style="font-size:0.75rem;">
-                                Exp {{ om.dbs_expiry|date:"d M Y" }}
+                                Exp {{ om.dbs_expiry|date:"M j, Y" }}
                                 {% if om.dbs_expiry < today %}
                                     <span class="badge bg-danger-subtle text-danger">Expired</span>
                                 {% elif om.dbs_expiry <= thirty_days %}
@@ -143,7 +143,7 @@
                         {% endif %}
                         {% if om.coaching_licence_expiry %}
                             <div class="text-muted" style="font-size:0.75rem;">
-                                Exp {{ om.coaching_licence_expiry|date:"d M Y" }}
+                                Exp {{ om.coaching_licence_expiry|date:"M j, Y" }}
                                 {% if om.coaching_licence_expiry < today %}
                                     <span class="badge bg-danger-subtle text-danger">Expired</span>
                                 {% elif om.coaching_licence_expiry <= thirty_days %}
@@ -215,13 +215,13 @@
                 <div class="row g-2">
                     {% if 'dbs' in org.enabled_fields %}
                     <div class="col-sm-3">
-                        <label class="form-label small fw-semibold">DBS number</label>
+                        <label class="form-label small fw-semibold">Background check number</label>
                         <input type="text" name="dbs_number" value="{{ om.dbs_number }}" class="form-control form-control-sm">
                     </div>
                     {% endif %}
                     {% if 'dbs' in org.enabled_fields %}
                     <div class="col-sm-3">
-                        <label class="form-label small fw-semibold">DBS expiry</label>
+                        <label class="form-label small fw-semibold">Background check expiry</label>
                         <input type="date" name="dbs_expiry" value="{{ om.dbs_expiry|date:'Y-m-d' }}" class="form-control form-control-sm">
                     </div>
                     {% endif %}
@@ -408,7 +408,7 @@
                 {% for holiday in holidays %}
                 <tr>
                     <td class="ps-3 py-2 small fw-semibold">{{ holiday.member.user.get_full_name|default:holiday.member.user.username }}</td>
-                    <td class="py-2 small">{{ holiday.start_date|date:"d M Y" }} – {{ holiday.end_date|date:"d M Y" }}</td>
+                    <td class="py-2 small">{{ holiday.start_date|date:"M j, Y" }} – {{ holiday.end_date|date:"M j, Y" }}</td>
                     <td class="py-2 small text-muted">{{ holiday.note|default:"—" }}</td>
                     <td class="py-2 small">
                         {% if holiday.end_date < today %}

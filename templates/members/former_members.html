@@ -14,7 +14,7 @@
 <div class="alert alert-info d-flex gap-2 mb-4" style="font-size:0.875rem;">
     <i class="bi bi-info-circle-fill flex-shrink-0 mt-1"></i>
     <div>
-        Former member records are retained for <strong>3 years</strong> after archiving to support auditing, insurance, medical, and safeguarding requirements. Members archived before <strong>{{ retention_cutoff|date:"d M Y" }}</strong> should be reviewed before removal.
+        Former member records are retained for <strong>3 years</strong> after archiving to support auditing, insurance, medical, and safeguarding requirements. Members archived before <strong>{{ retention_cutoff|date:"M j, Y" }}</strong> should be reviewed before removal.
     </div>
 </div>
 
@@ -42,7 +42,7 @@
                 </td>
                 <td>
                     {% if member.archived_at %}
-                        {{ member.archived_at|date:"d M Y" }}
+                        {{ member.archived_at|date:"M j, Y" }}
                     {% else %}
                         <span class="text-muted small">Unknown</span>
                     {% endif %}

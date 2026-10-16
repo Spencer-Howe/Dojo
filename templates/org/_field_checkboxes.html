@@ -13,7 +13,7 @@
         {% if row.renamable %}
         <input type="text" name="{{ row.key }}_label" value="{{ row.custom_label }}" maxlength="50"
                class="form-control form-control-sm mt-1" style="max-width:260px;"
-               placeholder="Call it… e.g. {% if row.key == 'licence' %}BJA licence{% else %}BJA coaching licence{% endif %}"
+               placeholder="Call it… e.g. {% if row.key == 'licence' %}BJA licence{% else %}BJA coaching license{% endif %}"
                aria-label="Name for {{ row.label }}">
         {% endif %}
     </div>

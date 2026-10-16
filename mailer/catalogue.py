@@ -42,13 +42,13 @@ EXAMPLE_COMMON = {
     'greeting': 'Hi Ann', 'first_name': 'Ann', 'member_name': 'Ann Lee',
 }
 EXAMPLE_INVOICE = {
-    'period': 'Autumn Term 2026', 'amount': '£45.00', 'due_date': '30 Sep 2026', 'reference': 'INV1234',
+    'period': 'Autumn Term 2026', 'amount': '$45.00', 'due_date': '30 Sep 2026', 'reference': 'INV1234',
     'pay_link': 'https://example.com/pay/…', 'portal_link': 'https://example.com/p/…',
 }
 
 INVOICE_FIELDS = (
     ('period', 'What the invoice is for, e.g. "Autumn Term 2026"'),
-    ('amount', 'Amount still to pay, e.g. "£45.00"'),
+    ('amount', 'Amount still to pay, e.g. "$45.00"'),
     ('due_date', 'Due date, e.g. "30 Sep 2026"'),
     ('reference', 'Reference to quote on a bank transfer, e.g. INV1234'),
     ('pay_link', 'Link to the invoice\'s payment page'),

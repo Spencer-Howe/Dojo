@@ -50,7 +50,7 @@ class EmailLayoutTests(TestCase):
         send_invoice_email(invoice)
         html = self.html()
         self.assertIn('Paid, thank you.', html)
-        self.assertNotIn('£0.00', html)
+        self.assertNotIn('$0.00', html)
 
     def test_session_cancelled_email_uses_the_same_layout(self):
         from mailer import blocks, compose

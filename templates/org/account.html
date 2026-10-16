@@ -129,7 +129,7 @@
         {# Organisations #}
         <div class="card mb-4">
             <div class="card-header bg-white border-bottom py-3">
-                <h6 class="mb-0">Your organisations</h6>
+                <h6 class="mb-0">Your organizations</h6>
             </div>
             <div class="list-group list-group-flush">
                 {% for m in memberships %}
@@ -143,7 +143,7 @@
                     {% endif %}
                 </div>
                 {% empty %}
-                <div class="list-group-item py-3 text-muted small">No organisation memberships found.</div>
+                <div class="list-group-item py-3 text-muted small">No organization memberships found.</div>
                 {% endfor %}
             </div>
         </div>
@@ -187,7 +187,7 @@
                 {% for holiday in holidays %}
                 <div class="list-group-item py-3 d-flex justify-content-between align-items-center">
                     <div>
-                        <div class="fw-semibold small">{{ holiday.start_date|date:"d M Y" }} – {{ holiday.end_date|date:"d M Y" }}</div>
+                        <div class="fw-semibold small">{{ holiday.start_date|date:"M j, Y" }} – {{ holiday.end_date|date:"M j, Y" }}</div>
                         {% if holiday.note %}<div class="text-muted small">{{ holiday.note }}</div>{% endif %}
                         {% if holiday.end_date < today %}
                             <span class="badge bg-secondary-subtle text-secondary mt-1">Past</span>

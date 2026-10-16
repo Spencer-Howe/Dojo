@@ -76,7 +76,7 @@
                             <td class="ps-3 py-2 small fw-semibold">{{ ann.subject }}</td>
                             <td class="py-2 small text-muted">{{ ann.recipient_label }}</td>
                             <td class="py-2 small text-muted">{{ ann.recipient_count }}</td>
-                            <td class="py-2 small text-muted pe-3">{{ ann.sent_at|date:"d M Y" }}</td>
+                            <td class="py-2 small text-muted pe-3">{{ ann.sent_at|date:"M j, Y" }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>

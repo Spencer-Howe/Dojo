@@ -102,7 +102,7 @@ def _line(name, amount, description, quantity=1, image=''):
     product = {'name': name[:250], 'description': description[:500]}
     if image:
         product['images'] = [image]
-    return {'price_data': {'currency': 'gbp', 'unit_amount': _pence(amount), 'product_data': product},
+    return {'price_data': {'currency': 'usd', 'unit_amount': _pence(amount), 'product_data': product},
             'quantity': quantity}
 
 
@@ -126,7 +126,7 @@ def checkout_line_items(invoice):
             plan = invoice.billing_policy.name if invoice.billing_policy else ''
             description = for_whom
             if invoice.discount_amount:
-                description += f' · includes a £{Decimal(invoice.discount_amount):.2f} discount'
+                description += f' · includes a ${Decimal(invoice.discount_amount):.2f} discount'
             lines.append(_line(f'{plan}: {invoice.period}' if plan else invoice.period, fee, description, image=image))
         for item in items:
             lines.append(_line(item.description or str(item.variant), item.unit_price,
@@ -136,7 +136,7 @@ def checkout_line_items(invoice):
         paid = invoice.amount_paid
         description = for_whom
         if paid:
-            description = f'£{paid:.2f} of £{amount:.2f} already paid. ' + description
+            description = f'${paid:.2f} of ${amount:.2f} already paid. ' + description
         lines = [_line(f'{invoice.period}: remaining balance' if paid else invoice.period, balance, description,
                        image=image)]
     return lines

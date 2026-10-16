@@ -183,7 +183,7 @@ class CreateCheckoutView(View):
             api_key=keys.secret,
             line_items=[{
                 'price_data': {
-                    'currency': 'gbp',
+                    'currency': 'usd',
                     'unit_amount': int(invoice.amount * 100),
                     'product_data': {
                         'name': f"{member.organisation.name} — {invoice.period}",

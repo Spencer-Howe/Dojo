@@ -372,7 +372,7 @@ class AttendanceRegisterView(ClassCoachMixin, View):
         session.notes = notes
         session.save(update_fields=['notes'])
 
-        messages.success(request, f'Register saved for {session.date:%d %b %Y}.')
+        messages.success(request, f'Register saved for {session.date:%b %d, %Y}.')
         return redirect('session_register', org_slug=self.org.slug, pk=self.assigned_class.pk, session_pk=session.pk)
 
 
@@ -500,7 +500,7 @@ class CancelSessionView(OrgAdminMixin, View):
             if not recipient:
                 continue
 
-            session_date = session.date.strftime('%A %-d %B %Y')
+            session_date = session.date.strftime('%A, %B %-d, %Y')
             try:
                 compose.send(self.org, 'session_cancelled', [recipient],
                              {**compose.member_values(member, to_guardian=has_guardians),

@@ -44,7 +44,7 @@
                 <tr>
                     <td class="ps-3 py-2">
                         <div class="small fw-semibold">{{ app.name }}</div>
-                        {% if app.date_of_birth and 'date_of_birth' in org.enabled_fields %}<div class="text-muted" style="font-size:0.75rem;">DOB {{ app.date_of_birth|date:"d M Y" }}</div>{% endif %}
+                        {% if app.date_of_birth and 'date_of_birth' in org.enabled_fields %}<div class="text-muted" style="font-size:0.75rem;">DOB {{ app.date_of_birth|date:"M j, Y" }}</div>{% endif %}
                     </td>
                     <td class="py-2 small text-muted">
                         {% if app.email %}<div>{{ app.email }}</div>{% endif %}
@@ -62,7 +62,7 @@
                     <td class="py-2 small text-muted" style="max-width:200px;">
                         {{ app.notes|truncatechars:80|default:"—" }}
                     </td>
-                    <td class="py-2 small text-muted">{{ app.submitted_at|date:"d M Y" }}</td>
+                    <td class="py-2 small text-muted">{{ app.submitted_at|date:"M j, Y" }}</td>
                     {% if status_filter == 'pending' %}
                     <td class="py-2 pe-3">
                         <div class="d-flex gap-1">

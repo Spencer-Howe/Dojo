@@ -103,9 +103,9 @@
                     <span class="small fw-semibold" style="color:rgba(255,255,255,.75);">Revenue this month</span>
                     <i class="bi bi-currency-pound" style="color:rgba(255,255,255,.4);font-size:1.2rem;"></i>
                 </div>
-                <div class="fs-2 fw-bold text-white">£{{ revenue_month|floatformat:2 }}</div>
+                <div class="fs-2 fw-bold text-white">${{ revenue_month|floatformat:2 }}</div>
                 {% if outstanding %}
-                <div class="small mt-1" style="color:rgba(255,255,255,.7);">£{{ outstanding|floatformat:2 }} outstanding</div>
+                <div class="small mt-1" style="color:rgba(255,255,255,.7);">${{ outstanding|floatformat:2 }} outstanding</div>
                 {% else %}
                 <div class="small mt-1" style="color:rgba(255,255,255,.4);">All paid up</div>
                 {% endif %}
@@ -189,7 +189,7 @@
                         {% for item in upcoming %}
                         <tr>
                             <td class="ps-3 py-3" style="width: 110px;">
-                                <div class="fw-semibold small">{{ item.session.date|date:"D d M" }}</div>
+                                <div class="fw-semibold small">{{ item.session.date|date:"D, M j" }}</div>
                                 {% if item.session.date == today %}
                                 <span class="badge bg-primary-subtle text-primary" style="font-size:0.6rem;">Today</span>
                                 {% endif %}
@@ -254,7 +254,7 @@
                     <i class="bi bi-bar-chart me-2 text-muted"></i> Attendance analytics
                 </a>
                 <a href="{% url 'org_settings' org_slug=org.slug %}" class="list-group-item list-group-item-action py-3">
-                    <i class="bi bi-gear me-2 text-muted"></i> Organisation settings
+                    <i class="bi bi-gear me-2 text-muted"></i> Organization settings
                 </a>
                 <a href="{% url 'org_audit_log' org_slug=org.slug %}" class="list-group-item list-group-item-action py-3">
                     <i class="bi bi-journal-check me-2 text-muted"></i> Audit log

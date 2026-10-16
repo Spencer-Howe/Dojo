@@ -65,7 +65,7 @@
                                            {% if row.already_invoiced %}disabled{% endif %}>
                                 </td>
                                 <td class="small fw-semibold py-2">{{ row.member.name }}</td>
-                                <td class="small py-2">£{{ row.amount|floatformat:2 }}</td>
+                                <td class="small py-2">${{ row.amount|floatformat:2 }}</td>
                                 <td class="small py-2">
                                     {% if row.already_invoiced %}
                                     <span class="badge bg-secondary-subtle text-secondary">Already invoiced</span>

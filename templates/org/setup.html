@@ -13,12 +13,12 @@
         <div class="text-center mb-5">
             {% load static %}
             <img src="{% static 'img/dojo-wordmark.png' %}" alt="Dojo" style="height:44px;filter:brightness(0) invert(1);opacity:0.9;margin-bottom:12px;">
-            <p style="color:rgba(255,255,255,.45);font-size:0.85rem;margin:0;">Let's set up your organisation</p>
+            <p style="color:rgba(255,255,255,.45);font-size:0.85rem;margin:0;">Let's set up your organization</p>
         </div>
 
         <div class="card" style="border:none!important;box-shadow:0 20px 60px rgba(0,0,0,.3)!important;">
             <div class="card-body p-4">
-                <h5 class="fw-semibold mb-4" style="font-size:1rem;">Create your organisation</h5>
+                <h5 class="fw-semibold mb-4" style="font-size:1rem;">Create your organization</h5>
 
                 {% if errors %}
                 <div class="alert alert-danger py-2 small mb-3">
@@ -32,10 +32,10 @@
                     {% csrf_token %}
 
                     <div class="mb-2 mt-1">
-                        <span class="text-uppercase text-muted" style="font-size:0.7rem;letter-spacing:.05em;">Organisation</span>
+                        <span class="text-uppercase text-muted" style="font-size:0.7rem;letter-spacing:.05em;">Organization</span>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small fw-semibold">Organisation name</label>
+                        <label class="form-label small fw-semibold">Organization name</label>
                         <input type="text" name="org_name" value="{{ org_name|default:'' }}" class="form-control" required autofocus>
                     </div>
                     <div class="mb-3">
@@ -116,7 +116,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-dark w-100 py-2">Create organisation</button>
+                    <button type="submit" class="btn btn-dark w-100 py-2">Create organization</button>
                 </form>
             </div>
         </div>

@@ -61,10 +61,10 @@ def calculate_invoice_amount(member, policy, term=None, year=None, month=None):
 
             if i == 0:
                 session_rate = rate
-                label = f"{cls.name} ({count} sessions × £{rate:.2f})"
+                label = f"{cls.name} ({count} sessions × ${rate:.2f})"
             else:
                 session_rate = rate * (1 - discount_pct / 100)
-                label = f"{cls.name} ({count} sessions × £{session_rate:.2f} — {discount_pct:.0f}% multi-class discount)"
+                label = f"{cls.name} ({count} sessions × ${session_rate:.2f} — {discount_pct:.0f}% multi-class discount)"
 
             line_total = session_rate * count
             gross += line_total

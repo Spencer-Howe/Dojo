@@ -608,7 +608,7 @@ class MemberImportView(OrgAdminMixin, View):
             dob = None
             if dob_raw:
                 from datetime import date as ddate
-                for fmt in ('%Y-%m-%d', '%d/%m/%Y', '%d-%m-%Y'):
+                for fmt in ('%Y-%m-%d', '%m/%d/%Y', '%m-%d-%Y'):
                     try:
                         dob = ddate.fromisoformat(dob_raw) if fmt == '%Y-%m-%d' else ddate.strptime(dob_raw, fmt)
                         break
@@ -620,7 +620,7 @@ class MemberImportView(OrgAdminMixin, View):
             joined_raw = (row.get('joined_date') or row.get('joined') or '').strip()
             joined = None
             if joined_raw:
-                for fmt in ('%Y-%m-%d', '%d/%m/%Y', '%d-%m-%Y'):
+                for fmt in ('%Y-%m-%d', '%m/%d/%Y', '%m-%d-%Y'):
                     try:
                         joined = ddate.fromisoformat(joined_raw) if fmt == '%Y-%m-%d' else ddate.strptime(joined_raw, fmt)
                         break

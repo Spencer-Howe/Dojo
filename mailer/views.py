@@ -39,7 +39,7 @@ class EmailTemplateListView(OrgAdminMixin, View):
         if request.POST.get('use_club_colour') or not colour:
             colour = ''
         elif not HEX_COLOUR.fullmatch(colour):
-            messages.error(request, 'The header colour should look like #1E3A5F.')
+            messages.error(request, 'The header color should look like #1E3A5F.')
             return redirect('org_email_templates', org_slug=self.org.slug)
         self.org.settings = {**(self.org.settings or {}), 'email_layout': {
             'header_colour': colour,

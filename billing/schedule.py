@@ -215,7 +215,7 @@ def notify_admins(run):
     if not recipients:
         return
     link = settings.SITE_URL.rstrip('/') + reverse('invoice_run', kwargs={'org_slug': org.slug, 'pk': run.pk})
-    text = (f'{run.invoice_count} invoices for {run.schedule.policy.name}, {run.period} (£{run.total:.2f} in all) '
+    text = (f'{run.invoice_count} invoices for {run.schedule.policy.name}, {run.period} (${run.total:.2f} in all) '
             f'are ready. Nothing has been sent to members yet.\n\nCheck and send them: {link}\n\n'
             f'Powered by Dojo')
     try:

@@ -50,7 +50,7 @@
                             <option value="{{ m.pk }}">{{ m.name }}</option>
                             {% endfor %}
                         </select>
-                        <button type="submit" class="btn btn-sm btn-dark text-nowrap">Enrol</button>
+                        <button type="submit" class="btn btn-sm btn-dark text-nowrap">Enroll</button>
                     </form>
                     {% else %}
                     <p class="text-muted small mb-0">All active members are already enrolled.</p>
@@ -103,7 +103,7 @@
                         {% for entry in waiting_list %}
                         <tr>
                             <td class="ps-3 py-2 small fw-semibold">{{ entry.member.name }}</td>
-                            <td class="py-2 small text-muted">Joined {{ entry.joined_at|date:"d M Y" }}</td>
+                            <td class="py-2 small text-muted">Joined {{ entry.joined_at|date:"M j, Y" }}</td>
                             <td class="text-end pe-3 py-2">
                                 <form method="post" action="{% url 'class_waiting_remove' org_slug=org.slug pk=cls.pk member_pk=entry.member.pk %}">
                                     {% csrf_token %}
@@ -204,7 +204,7 @@
                         <tr>
                             <td class="ps-3 py-2 small">
                                 <a href="{% url 'session_register' org_slug=org.slug pk=cls.pk session_pk=session.pk %}" class="text-decoration-none fw-semibold">
-                                    {{ session.date|date:"D d M Y" }}
+                                    {{ session.date|date:"D, M j, Y" }}
                                 </a>
                                 {% if session.is_cancelled %}
                                 <span class="badge bg-danger-subtle text-danger ms-1" style="font-size:0.6rem;">Cancelled</span>

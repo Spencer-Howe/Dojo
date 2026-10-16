@@ -65,7 +65,7 @@ def start_setup(member, return_url, invoice=None):
     session = stripe.checkout.Session.create(
         api_key=keys.secret,
         mode='setup',
-        currency='gbp',
+        currency='usd',
         customer=_customer_id(member, keys),
         success_url=f'{return_url}{separator}autopay_session={{CHECKOUT_SESSION_ID}}',
         cancel_url=return_url,
@@ -187,7 +187,7 @@ def collect(invoice):
     params = {
         'api_key': keys.secret,
         'amount': int((balance * 100).quantize(Decimal(1))),
-        'currency': 'gbp',
+        'currency': 'usd',
         'customer': invoice.member.stripe_customer_id,
         'payment_method': autopay.payment_method_id,
         # Charge the saved method as it is, with no redirects: the member isn't there to follow one.

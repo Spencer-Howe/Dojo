@@ -40,7 +40,7 @@ class Command(BaseCommand):
 
         count = 0
         for member in candidates:
-            label = f'{member.name} (#{member.pk}, {member.organisation}) — token issued {member.token_created_at:%d %b %Y}'
+            label = f'{member.name} (#{member.pk}, {member.organisation}) — token issued {member.token_created_at:%b %d, %Y}'
             if options['dry_run']:
                 self.stdout.write(f'Would rotate: {label}')
                 continue

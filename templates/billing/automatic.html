@@ -20,7 +20,7 @@
         {% for run in held_runs %}
         <a href="{% url 'invoice_run' org_slug=org.slug pk=run.pk %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-2 py-3">
             <span><span class="fw-semibold small">{{ run.schedule.policy.name }}: {{ run.period }}</span>
-                <span class="d-block text-muted" style="font-size:0.78rem;">{{ run.invoice_count }} invoice{{ run.invoice_count|pluralize }}, £{{ run.total|floatformat:2 }} · made {{ run.created_at|date:"j M" }} · not sent to members yet</span></span>
+                <span class="d-block text-muted" style="font-size:0.78rem;">{{ run.invoice_count }} invoice{{ run.invoice_count|pluralize }}, ${{ run.total|floatformat:2 }} · made {{ run.created_at|date:"M j" }} · not sent to members yet</span></span>
             <span class="btn btn-sm btn-dark text-nowrap">Check and send</span>
         </a>
         {% endfor %}
@@ -45,7 +45,7 @@
                 <p class="small text-muted mb-0">This plan is "Custom / Manual", so it has no schedule. Change its billing cycle on the <a href="{% url 'billing_policies' org_slug=org.slug %}">Billing policies</a> page to make its invoices automatically.</p>
                 {% else %}
                 {% if schedule.enabled and plan.next %}
-                <div class="alert alert-light border small py-2 mb-3"><i class="bi bi-calendar-event me-1"></i> <strong>Next: {{ plan.next.0|date:"j M Y" }}</strong> for {{ plan.next.1 }}. About {{ plan.count }} invoice{{ plan.count|pluralize }} (£{{ plan.total|floatformat:2 }}) at today's prices.</div>
+                <div class="alert alert-light border small py-2 mb-3"><i class="bi bi-calendar-event me-1"></i> <strong>Next: {{ plan.next.0|date:"M j, Y" }}</strong> for {{ plan.next.1 }}. About {{ plan.count }} invoice{{ plan.count|pluralize }} (${{ plan.total|floatformat:2 }}) at today's prices.</div>
                 {% elif schedule.enabled and policy.billing_cycle == 'termly' %}
                 <div class="alert alert-warning small py-2 mb-3">No upcoming terms. Add your term dates on the <a href="{% url 'billing_policies' org_slug=org.slug %}">Billing policies</a> page.</div>
                 {% endif %}
@@ -145,7 +145,7 @@
                 <a href="{% url 'invoice_run' org_slug=org.slug pk=run.pk %}" class="list-group-item list-group-item-action py-2">
                     <div class="d-flex justify-content-between small"><span class="fw-semibold">{{ run.period }}</span>
                         {% if run.status == 'sent' %}<span class="text-success">Sent</span>{% elif run.status == 'cancelled' %}<span class="text-muted">Cancelled</span>{% else %}<span class="text-warning-emphasis">To check</span>{% endif %}</div>
-                    <div class="text-muted" style="font-size:0.75rem;">{{ run.schedule.policy.name }} · {{ run.invoice_count }} invoice{{ run.invoice_count|pluralize }} · £{{ run.total|floatformat:2 }} · {{ run.created_at|date:"j M Y" }}</div>
+                    <div class="text-muted" style="font-size:0.75rem;">{{ run.schedule.policy.name }} · {{ run.invoice_count }} invoice{{ run.invoice_count|pluralize }} · ${{ run.total|floatformat:2 }} · {{ run.created_at|date:"M j, Y" }}</div>
                 </a>
                 {% endfor %}
             </div>

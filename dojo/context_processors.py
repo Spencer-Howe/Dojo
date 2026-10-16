@@ -19,3 +19,7 @@ def dojo_version(request):
 
 def dojo_debug(request):
     return {'DOJO_DEBUG': settings.DEBUG}
+
+
+def dojo_features(request):
+    return {'TWO_FACTOR_ENABLED': settings.TWO_FACTOR_ENABLED}

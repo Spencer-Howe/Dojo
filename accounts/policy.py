@@ -1,3 +1,5 @@
+from django.conf import settings
+
 from organisations.models import Organisation
 
 # Session key holding the pk of the authenticator the person proved this session.
@@ -7,6 +9,8 @@ VERIFIED_SESSION_KEY = 'two_factor_verified'
 
 def two_factor_required(user):
     """Whether any club `user` works for requires them to use two-step sign-in."""
+    if not settings.TWO_FACTOR_ENABLED:
+        return False
     for membership in user.organisation_memberships.select_related('organisation'):
         if membership.organisation.requires_two_factor(membership):
             return True

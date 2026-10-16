@@ -2,6 +2,7 @@
     {% csrf_token %}
     <input type="hidden" name="action" value="security">
 
+    {% if TWO_FACTOR_ENABLED %}
     <label class="form-label small fw-semibold" for="two-factor">Two-step sign-in</label>
     <select name="two_factor" id="two-factor" class="form-select form-select-sm" style="max-width:280px;">
         {% for value, label in two_factor_choices %}
@@ -20,7 +21,9 @@
         {% endif %}
     </div>
 
-    <label class="form-label small fw-semibold mt-3" for="session-timeout">Log staff out after inactivity</label>
+    {% endif %}
+
+    <label class="form-label small fw-semibold{% if TWO_FACTOR_ENABLED %} mt-3{% endif %}" for="session-timeout">Log staff out after inactivity</label>
     <select name="session_timeout_minutes" id="session-timeout" class="form-select form-select-sm" style="max-width:280px;">
         {% for minutes, label in session_timeout_choices %}
         <option value="{{ minutes }}" {% if org.session_timeout_minutes == minutes %}selected{% endif %}>{{ label }}</option>

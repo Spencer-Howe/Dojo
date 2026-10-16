@@ -102,6 +102,7 @@ TEMPLATES = [
                 'dojo.context_processors.dojo_licence',
                 'dojo.context_processors.dojo_version',
                 'dojo.context_processors.dojo_debug',
+                'dojo.context_processors.dojo_features',
             ],
         },
     },
@@ -143,6 +144,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DOJO_LICENCE_KEY = os.environ.get('DOJO_LICENCE_KEY', '')
 DOJO_LICENCE_HOLDER = os.environ.get('DOJO_LICENCE_HOLDER', '')
+
+# Two-step sign-in (authenticator app codes). Off by default in this fork: staff
+# access is gated in front of Dojo instead. Set TWO_FACTOR_ENABLED=True to bring it back.
+TWO_FACTOR_ENABLED = os.environ.get('TWO_FACTOR_ENABLED', 'False') == 'True'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

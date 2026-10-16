@@ -4,7 +4,7 @@ from unittest import mock
 from django.contrib.auth.models import User
 from django.core import mail
 from django.core.management import call_command
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from accounts import totp
@@ -45,6 +45,7 @@ class TotpTests(TestCase):
         self.assertEqual(uri, 'otpauth://totp/Dojo%20%28Test%20Club%29%3Acoach?secret=ABC&issuer=Dojo+%28Test+Club%29')
 
 
+@override_settings(TWO_FACTOR_ENABLED=True)
 class TwoFactorTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -332,3 +333,21 @@ class ResetCommandTests(TwoFactorTestCase):
         call_command('reset_two_factor', 'admin', stdout=StringIO())
         self.assertFalse(TwoFactorDevice.objects.exists())
         self.assertFalse(RecoveryCode.objects.exists())
+
+
+@override_settings(TWO_FACTOR_ENABLED=False)
+class SwitchedOffTests(TwoFactorTestCase):
+    def test_required_club_lets_staff_straight_in(self):
+        self.set_policy(Organisation.TWO_FACTOR_ALL)
+        self.sign_in(self.admin)
+        self.assertEqual(self.client.get(self.dashboard).status_code, 200)
+
+    def test_an_enrolled_app_is_not_asked_for(self):
+        self.enrol(self.coach)
+        self.sign_in(self.coach)
+        self.assertEqual(self.client.get(self.dashboard).status_code, 200)
+
+    def test_account_page_hides_two_step_sign_in(self):
+        self.sign_in(self.admin)
+        response = self.client.get(reverse('account_settings', kwargs={'org_slug': self.org.slug}))
+        self.assertNotContains(response, 'Two-step sign-in')

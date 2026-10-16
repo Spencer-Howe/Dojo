@@ -96,6 +96,7 @@
 
 
         {# Two-step sign-in #}
+        {% if TWO_FACTOR_ENABLED %}
         {% url 'account_settings' org_slug=org.slug as account_url %}
         <div class="card mb-4" id="two-factor">
             <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
@@ -125,6 +126,7 @@
                 {% endif %}
             </div>
         </div>
+        {% endif %}
 
         {# Organisations #}
         <div class="card mb-4">

@@ -17,7 +17,7 @@ class TwoFactorMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        if request.user.is_authenticated and not self._exempt(request.path):
+        if settings.TWO_FACTOR_ENABLED and request.user.is_authenticated and not self._exempt(request.path):
             device = device_for(request.user)
             if device is not None and not is_verified(request, device):
                 return self._send_to(request, 'two_factor_verify')
